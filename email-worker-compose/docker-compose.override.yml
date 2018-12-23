@@ -1,4 +1,4 @@
-## Nesse arquivo podemos sobrescrever valores do docker-compose.yml
+## Nesse arquivo podemos sobrescrever valores do docker-compose.yml, podendo ate mesmo estar errado os valores no docker-compose.yml
 version: '3'
 services:
   app:

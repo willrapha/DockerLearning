@@ -1,6 +1,9 @@
 version: '3'
 volumes:
   dados:
+networks:
+  banco:
+  web:
 services:
   ## db - serviço de banco de dados
   db:
@@ -13,6 +16,9 @@ services:
       # mapeamos o ./scripts/init.sql para um caminho em nosso container
       # docker-entrypoint-initdb.d - padrao de nomenclatura do postgres
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+      ## db faz parte da rede banco
+    networks:
+      - banco
   ## frontend
   frontend:
     image: nginx:1.13
@@ -23,6 +29,11 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
+    ## frontend faz parte da rede web mas depende da app
+    networks:
+      - web
+    depends_on:
+      - app
   ## backend
   app:
     image: python:3.6
@@ -33,3 +44,9 @@ services:
     working_dir: /app
     ## comando que queremos executar - colocamos o 'bash' devido a permissão para executar o nosso app.sh
     command: bash ./app.sh
+    ## app faz parte da rede banco e web mas depende da db
+    networks:
+      - banco
+      - web
+    depends_on:
+      - db

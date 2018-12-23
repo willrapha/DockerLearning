@@ -1,4 +1,4 @@
 #!bin/sh
-
-pip install bottle==0.12.13
+## chamando o sender.py nosso backend - psycopg2==2.7.1 - dependencia do postgresql
+pip install bottle==0.12.13 psycopg2==2.7.1
 python -u sender.py

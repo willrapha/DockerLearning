@@ -1,0 +1,6 @@
+## Nesse arquivo podemos sobrescrever valores do docker-compose.yml
+version: '3'
+services:
+  app:
+    environment:
+      - DB_NAME=email_sender

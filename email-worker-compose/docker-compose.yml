@@ -53,6 +53,8 @@ services:
     depends_on:
       - db
       - queue
+    ## setando o DB_NAME no docker-compose sobrescrevemos a variavel DB_NAME que esta em nosso sender.py
+    ## podendo ate mesmo estar errado os valores em nosso sender.py
     environment:
       - DB_NAME=email_sender
   queue:
